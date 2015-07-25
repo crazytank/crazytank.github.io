@@ -23,7 +23,7 @@
         <br>
         <table align="center">
           <tr>
-            <td><input class="form-control input-sm" placeHolder="Room Name" name="room" id="room" type="text" ng-model="room"></td>
+            <td><input class="form-control input-sm" placeHolder="Room Name" name="room" id="room" type="text" ng-change="roomChanged()" ng-model="room"></td>
             <td>&nbsp;&nbsp;</td>
             <td>
               <button onclick="joinRoom(this.id)" class="btn btn-success" id="{{room}}" ng-disabled="joinDisabled" >&nbsp;&nbsp;Join&nbsp;&nbsp;</button>
@@ -117,6 +117,10 @@
           }).
           error(function(data, status, headers, config) {
           });
+        }
+        $scope.roomChanged = function() {
+          if ($scope.room.length > 0) $scope.joinDisabled = false;
+          else $scope.joinDisabled = true;
         }
       });
 
