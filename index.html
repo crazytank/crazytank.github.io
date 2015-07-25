@@ -26,7 +26,7 @@
             <td><input class="form-control input-sm" placeHolder="Room Name" name="room" id="room" type="text" ng-model="room"></td>
             <td>&nbsp;&nbsp;</td>
             <td>
-              <a onclick="joinRoom(this.id)" class="btn btn-success" id="{{room}}" href="/#{{room}}">&nbsp;&nbsp;Join&nbsp;&nbsp;</a>
+              <button onclick="joinRoom(this.id)" class="btn btn-success" id="{{room}}" ng-disabled="joinDisabled" >&nbsp;&nbsp;Join&nbsp;&nbsp;</button>
               <a ng-click="createRoom()" class="btn btn-success" id="create" href="#">Create</a>
             </td>
           </tr>
@@ -92,6 +92,7 @@
 
       var app = angular.module("MyApp", []);
       app.controller("RoomsCtrl", function($scope, $http, $interval) {
+        $scope.joinDisabled = true;
         $http.defaults.useXDomain = true;
         $http.get('http://enigmatic-ocean-4643.herokuapp.com/rooms').
         success(function(data, status, headers, config) {
@@ -103,13 +104,16 @@
         var re = new RegExp(/^[a-z0-9]+$/i);
         if(room.length >= 1 &&
            room.length <= 16 &&
-           re.test(room)) $scope.room = room;
-
+           re.test(room)) {
+          $scope.room = room;
+          $scope.joinDisabled = false;
+        }
         $scope.createRoom = function() {
           $http.defaults.useXDomain = true;
           $http.get('http://enigmatic-ocean-4643.herokuapp.com/create').
           success(function(data, status, headers, config) {
             $scope.room = data;
+            $scope.joinDisabled = false;
           }).
           error(function(data, status, headers, config) {
           });
@@ -117,6 +121,7 @@
       });
 
       function joinRoom(room) {
+        location.hash = '#' + room;
         document.getElementById("home").style.visibility = "hidden";
         document.getElementById("play").value = room;
         $('#menuModal').modal('show');
