@@ -13,7 +13,6 @@ var stage = document.getElementById('enchant-stage');
 stage.style.position = 'absolute';
 stage.style.left =  offsetX + 'px';
 stage.style.top = offsetY + 'px';
-document.body.style.overflow = "hidden";
 var roomName;
 var playerName;
 var socket;
@@ -525,6 +524,7 @@ function myGame(name, room) {
 
         scene.addEventListener('enterframe', function (event) {
 
+            window.scrollTo(0,0);
             var hits = [];
 /*
             hits = BulletEnemy.intersect(Enemy);
