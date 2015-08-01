@@ -56,8 +56,10 @@ function myGame(name, room) {
     var game = new Core(w, h); game.fps = 60; game.scale = scale;
 
     game.keybind(81, 'left');
+    game.keybind(65, 'left');
     game.keybind(68, 'right');
     game.keybind(90, 'up');
+    game.keybind(87, 'up');
     game.keybind(83, 'down');
 
     game.preload('bullet.png',
