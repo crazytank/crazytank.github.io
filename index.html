@@ -25,6 +25,9 @@
     </script>
   </head>
   <body style="margin: 0; padding:0; height:100%;">
+    <div id="status" class="alert alert-info">
+      Welcome, <a href="#" class="alert-link">this game is still under development and not completed yet</a>. If you have any feedback or improvement you can contact us, thanks.
+    </div>
     <div id="game">
       <div id="enchant-stage"></div>
     </div>
@@ -185,6 +188,8 @@
         document.getElementById("home").style.visibility = "hidden";
         document.getElementById("info").style.visibility = "hidden";
         document.getElementById("welcome").style.visibility = "hidden";
+        document.getElementById("status").style.visibility = "hidden";
+        document.getElementById("status").parentNode.removeChild(document.getElementById("status"));
         document.body.style.overflow = "hidden";
         document.getElementById("play").value = room;
         $('#menuModal').modal('show');
