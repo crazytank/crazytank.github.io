@@ -630,7 +630,7 @@ socket.on('damage', function(data) {
     var eindex = enemies.map(function(x) {return x.id}).indexOf(data.eid);
     scene.removeChild(player.bullets[bindex]);
     player.bullets.splice(bindex, 1);
-    enemies[eindex].damage();
+    if (enemies[eindex] !== undefined) enemies[eindex].damage();
 });
 
 socket.on('ondamage', function(data) {
